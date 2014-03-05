@@ -7,7 +7,7 @@ Controls
 --------
 - Click to trigger sound on and off
 - MouseOver to blaze fire
-<body>
+
     <canvas id="canvas" width="480" height="480"></canvas>
 	<audio id="sound" autoplay loop>
 		<source src="fireBurn.ogg">
@@ -107,4 +107,3 @@ Controls
 
 	  }
     </script>
-  </body>
