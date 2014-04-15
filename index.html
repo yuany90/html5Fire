@@ -12,7 +12,7 @@
     	}
     	#canvas{
     		margin:0 auto;
-    		padding:0;
+    		padding-top:20px;
     	}
     </style>
   </head>
@@ -22,12 +22,6 @@
 		<source src="fireBurn.ogg">
 		<source src="fireBurn.mp3">
 	 </audio>
-	<style>
-		*{
-			margin:0 auto;
-			padding:0;
-		}
-	</style>
     <script src="animate.js"></script>
     <script src="particle.js"></script>
     <script>
@@ -63,11 +57,29 @@
 				particle.set(fireLocation, fireSize, baseLife, baseVy);
 			}
 		}
-
+		
+		var mouse = {x: 0, y: 0, event: null},
+	        body_scrollLeft = document.body.scrollLeft,
+	        element_scrollLeft = document.documentElement.scrollLeft,
+	        body_scrollTop = document.body.scrollTop,
+	        element_scrollTop = document.documentElement.scrollTop,
+	        offsetLeft = element.offsetLeft,
+	        offsetTop = element.offsetTop;
+	        
 		canvas.addEventListener("mousemove", mouseMove, false);
 		function mouseMove(e){
-			if(fireLocation.x <= e.pageX+10  && fireLocation.y <= e.pageY+20
-			&& fireLocation.x >= e.pageX-10  && fireLocation.y >= e.pageY-50){
+			if (e.pageX || e.pageY) {
+			      mouse.x = e.pageX;
+			      mouse.y = e.pageY;
+			} else {
+			      mouse.x = e.clientX + body_scrollLeft + element_scrollLeft;
+			      mouse.y = e.clientY + body_scrollTop + element_scrollTop;
+			}
+			mouse.x -= offsetLeft;
+			mouse.y -= offsetTop;
+			    
+			if(fireLocation.x <= mouse.x+10  && fireLocation.y <= mouse.y+20
+			&& fireLocation.x >= mouse.x-10  && fireLocation.y >= mouse.y-50){
 				fireSize = {x:60, y:40};
 				baseLife = 50;
 				baseVy = 15;
